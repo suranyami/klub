@@ -11,10 +11,15 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
+
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
         <router-link to="/page2" class="navbar-item">Page2</router-link>
+      </div>
+      <div class="navbar-end">
+        <router-link to="/login" class="navbar-item">Login</router-link>
+        <router-link to="/register" class="navbar-item">Register</router-link>
       </div>
     </div>
   </nav>
