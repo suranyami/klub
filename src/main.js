@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import 'bulma/css/bulma.css'
+require('./assets/main.scss')
 
 Vue.config.productionTip = false
 
