@@ -1,0 +1,12 @@
+@charset "utf-8";
+@import './theme';
+@import '~bulma/bulma';
+
+.title {
+  color: darken(turquoise, 30%);
+}
+
+.router-link-exact-active {
+  background-color: $primary;
+  color: white;
+}
