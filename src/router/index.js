@@ -17,6 +17,5 @@ export default new Router({
       name: 'HelloWorld2',
       component: HelloWorld2
     }
-
   ]
 })
