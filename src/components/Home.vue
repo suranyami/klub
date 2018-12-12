@@ -1,7 +1,6 @@
 <template>
-  <div class="hello">
-    <h1 class="title">{{ msg }}</h1>
-    <p>Welcome to Klub</p>
+  <div class="content is-fullscreen">
+    <h1>{{ message }}</h1>
   </div>
 </template>
 
@@ -10,7 +9,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      message: 'Klub: your club marketing toolbox'
     }
   }
 }
