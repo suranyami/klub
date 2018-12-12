@@ -25,9 +25,10 @@
           <button class="button is-block is-info is-large is-fullwidth">Login</button>
         </form>
       </div>
+
       <div class="tabs has-text-centered">
-        <router-link to="/register" class="navbar-item">Register</router-link>
-        <router-link to="/forgot" class="navbar-item">Forgot Password</router-link>
+        <router-link to="/register">Register</router-link>
+        <router-link to="/forgot">Forgot Password</router-link>
       </div>
     </div>
   </div>
@@ -44,10 +45,5 @@ export default {
 
   .input {
     border-color: $grey-lighter;
-  }
-  .login-helpers {
-    .navbar-item {
-      width: 40%;
-    }
   }
 </style>
