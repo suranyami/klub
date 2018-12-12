@@ -40,6 +40,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+  @import '@/assets/main.scss';
 
+  .navbar {
+    margin-bottom: $gap / 2;
+  }
 </style>
