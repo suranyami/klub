@@ -14,7 +14,11 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item">Home</router-link>
+        <router-link to="/" class="navbar-item">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </router-link>
         <router-link to="/page2" class="navbar-item">Page2</router-link>
       </div>
       <div class="navbar-end">
