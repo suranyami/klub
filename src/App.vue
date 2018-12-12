@@ -1,25 +1,32 @@
 <template>
-  <div class="container">
-    <div id="app">
+  <section class="hero is-medium is-fullheight">
+    <div class="hero-head">
       <nav-bar/>
+    </div>
+
+    <div class="body">
       <router-view/>
     </div>
 
-    <button class="button is-primary">Button</button>
-  </div>
+    <div class="hero-foot">
+      <my-footer/>
+    </div>
+  </section>
 </template>
 
 <script>
 import NavBar from './router/NavBar.vue'
+import Footer from './components/Footer.vue'
 export default {
   components: {
-    'nav-bar': NavBar
+    'nav-bar': NavBar,
+    'my-footer': Footer
   },
   name: 'App'
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Work Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
