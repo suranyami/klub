@@ -1,10 +1,10 @@
 @charset 'utf-8';
-@import './fonts';
 @import './theme';
 @import '~bulma/bulma';
 
 .title {
   color: darken(turquoise, 30%);
+  font-weight: bold;
 }
 
 .router-link-exact-active {

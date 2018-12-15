@@ -1,5 +1,5 @@
 <template>
-  <div class="content is-fullscreen">
+  <div class="content is-fullscreen has-text-centered">
     <h1>{{ message }}</h1>
   </div>
 </template>

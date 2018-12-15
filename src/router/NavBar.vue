@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
         <h1 class="title">Klub</h1>
@@ -22,7 +22,8 @@
         <router-link to="/page2" class="navbar-item">Page2</router-link>
       </div>
       <div class="navbar-end">
-        <router-link to="/login" class="navbar-item">Login</router-link>
+        <div v-if="userId" class="navbar-item" @click="logout()">Logout</div>
+        <router-link v-else to="/login" class="navbar-item">Login</router-link>
         <router-link to="/register" class="navbar-item">Register</router-link>
       </div>
     </div>
@@ -30,11 +31,20 @@
 </template>
 
 <script>
+import { USER_ID, AUTH_TOKEN } from '../constants/settings'
+
 export default {
   name: 'NavBar',
-  data () {
-    return {
-      title: 'Something'
+  computed: {
+    userId () {
+      return this.$root.$data.userId
+    }
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem(USER_ID)
+      localStorage.removeItem(AUTH_TOKEN)
+      this.$root.$data.userId = localStorage.getItem(USER_ID)
     }
   }
 }
@@ -42,7 +52,6 @@ export default {
 
 <style lang="scss">
   @import '@/assets/main.scss';
-
   .navbar {
     margin-bottom: $gap / 2;
   }
