@@ -1,17 +1,16 @@
 <template>
-  <section class="hero is-medium is-fullheight-with-navbar">
-    <div class="hero-head">
-      <nav-bar/>
-    </div>
+  <div>
+    <nav-bar/>
+    <section class="hero is-medium is-fullheight-with-navbar">
+      <div class="body">
+        <router-view/>
+      </div>
 
-    <div class="body">
-      <router-view/>
-    </div>
-
-    <div class="hero-foot">
-      <my-footer/>
-    </div>
-  </section>
+      <div class="hero-foot">
+        <my-footer/>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
