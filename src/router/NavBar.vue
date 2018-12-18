@@ -14,24 +14,28 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item">
+        <router-link to="/home" class="navbar-item">
           <span class="icon">
             <i class="fas fa-home"></i>
           </span>
         </router-link>
         <router-link to="/page2" class="navbar-item">Page2</router-link>
       </div>
+
       <div class="navbar-end">
-        <div v-if="userId" class="navbar-item" @click="logout()">Logout</div>
-        <router-link v-else to="/login" class="navbar-item">Login</router-link>
-        <router-link to="/register" class="navbar-item">Register</router-link>
+        <div v-if="userId" class="navbar-item" @click="logout()">
+          <button class="button is-small">Logout</button>
+        </div>
+        <div v-if="!userId">
+          <router-link to="/login" class="navbar-item">Login</router-link>
+        </div>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import { USER_ID, AUTH_TOKEN } from '../constants/settings'
+import { MY_USER_ID, AUTH_TOKEN } from '../constants/settings'
 
 export default {
   name: 'NavBar',
@@ -42,9 +46,9 @@ export default {
   },
   methods: {
     logout () {
-      localStorage.removeItem(USER_ID)
+      localStorage.removeItem(MY_USER_ID)
       localStorage.removeItem(AUTH_TOKEN)
-      this.$root.$data.userId = localStorage.getItem(USER_ID)
+      this.$root.$data.userId = localStorage.getItem(MY_USER_ID)
     }
   }
 }
