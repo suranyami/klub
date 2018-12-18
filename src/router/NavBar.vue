@@ -60,9 +60,11 @@ export default {
 </script>
 
 <style lang="scss">
+@import "bulma/sass/utilities/_all.sass";
+
 .router-link-exact-active {
-  background-color: black;
-  color: white;
+  background-color: $link-active;
+  color: $text-invert;
 }
 
 .hero {
