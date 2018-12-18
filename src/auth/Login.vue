@@ -1,6 +1,6 @@
 <template>
   <div class="container has-text-centered">
-    <div class="column is-4 is-offset-4">
+    <div class="column is-6 is-offset-2">
       <h3 class="title">Login</h3>
       <p class="subtitle">Please login to proceed.</p>
       <div class="box">
@@ -9,9 +9,21 @@
             <div class="control">
               <input
                 v-show="!login"
-                v-model="name"
+                v-model="firstName"
+                class="input"
                 type="text"
-                placeholder="Your name">
+                placeholder="First name">
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <input
+                v-show="!login"
+                v-model="lastName"
+                class="input"
+                type="text"
+                placeholder="Last name">
             </div>
           </div>
 
@@ -19,7 +31,7 @@
             <div class="control">
               <input
                 v-model="email"
-                class="input is-large"
+                class="input"
                 type="email"
                 placeholder="Your Email"
                 autofocus="">
@@ -30,76 +42,46 @@
             <div class="control">
               <input
                 v-model="password"
-                class="input is-large"
+                class="input"
                 type="password"
                 placeholder="Your Password">
             </div>
           </div>
 
-          <div class="field">
+          <!-- <div class="field">
             <label class="checkbox">
               <input type="checkbox"/> Remember me
             </label>
           </div>
+ -->
+          <div class="field is-grouped">
+            <div class="control">
+              <button
+                type="submit"
+                class="button is-block is-info"
+                @click="confirm()">
+                {{login ? 'Login' : 'Create account'}}
+              </button>
+            </div>
+            <div class="control">
+              <button
+                type="submit"
+                class="button is-text"
+                @click="login = !login">
+                {{login ? 'Sign Up' : 'Already have an account?'}}
+              </button>
+            </div>
 
-          <button
-            class="button is-block is-info is-large is-fullwidth"
-            @click="confirm()">
-            {{login ? 'Login' : 'create account'}}
-          </button>
+          </div>
         </form>
-      </div>
-
-      <div class="tabs has-text-centered">
-        <router-link to="/register">Register</router-link>
-        <router-link to="/forgot">Forgot Password</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { USER_ID, AUTH_TOKEN } from '../constants/settings'
-
-export const CREATE_USER_MUTATION = gql`
-  mutation CreateUserMutation($name: String!, $email: String!, $password: String!) {
-    createUser(
-      name: $name,
-      authProvider: {
-        email: {
-          email: $email,
-          password: $password
-        }
-      }
-    ) {
-      id
-    }
-
-    signinUser(email: {
-      email: $email,
-      password: $password
-    }) {
-      token
-      user {
-        id
-      }
-    }
-  }
-`
-
-export const SIGNIN_USER_MUTATION = gql`
-  mutation SigninUserMutation($email: String!, $password: String!) {
-    signinUser(email: {
-      email: $email,
-      password: $password
-    }) {
-      token
-      user {
-        id
-      }
-    }
-  }
-`
+import { MY_USER_ID, AUTH_TOKEN } from '../constants/settings'
+import { CREATE_USER_MUTATION, LOGIN_USER_MUTATION } from './mutations'
 
 export default {
   name: 'Login',
@@ -107,23 +89,21 @@ export default {
     return {
       email: '',
       login: true,
-      name: '',
+      firstName: '',
+      lastName: '',
       password: ''
     }
   },
   methods: {
     confirm () {
-      const { name, email, password } = this.$data
+      const { firstName, lastName, email, password } = this.$data
       if (this.login) {
         this.$apollo.mutate({
-          mutation: SIGNIN_USER_MUTATION,
-          variables: {
-            email,
-            password
-          }
+          mutation: LOGIN_USER_MUTATION,
+          variables: {email, password}
         }).then((result) => {
-          const id = result.data.signinUser.user.id
-          const token = result.data.signinUser.token
+          const id = result.data.login.user.id
+          const token = result.data.login.token
           this.saveUserData(id, token)
         }).catch((error) => {
           alert(error)
@@ -132,24 +112,26 @@ export default {
         this.$apollo.mutate({
           mutation: CREATE_USER_MUTATION,
           variables: {
-            name,
+            firstName,
+            lastName,
             email,
             password
           }
         }).then((result) => {
-          const id = result.data.signinUser.user.id
-          const token = result.data.signinUser.token
+          const id = result.data.createUser.user.id
+          const token = result.data.createUser.token
           this.saveUserData(id, token)
         }).catch((error) => {
           alert(error)
+          this.$router.push({ path: '/login' })
         })
       }
-      this.$router.push({path: '/'})
+      this.$router.push({ path: '/home' })
     },
     saveUserData (id, token) {
-      localStorage.setItem(USER_ID, id)
+      localStorage.setItem(MY_USER_ID, id)
       localStorage.setItem(AUTH_TOKEN, token)
-      this.$root.$data.userId = localStorage.getItem(AUTH_TOKEN)
+      this.$root.$data.userId = localStorage.getItem(MY_USER_ID)
     }
   }
 }
