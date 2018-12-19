@@ -63,7 +63,10 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 })
 
-Vue.use(Buefy)
+Vue.use(Buefy, {
+  defaultIconPack: 'fas',
+  defaultContainerElement: '#content'
+})
 Vue.use(VueApollo)
 
 Vue.config.productionTip = false
