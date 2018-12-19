@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const LIST_USERS_QUERY = gql`
-  query ListUsersMutation {
+  query ListUsers {
     users {
       id
       firstName
@@ -9,4 +9,30 @@ export const LIST_USERS_QUERY = gql`
       email
     }
   }
+`
+
+export const PAGINATED_USER_LIST = gql`
+query ListUsersPage (
+  $page: Int!,
+  $pageSize: Int!,
+  $sortBy: String!,
+  $sortOrder: String!
+) {
+  usersPage(
+    page: $page,
+    pageSize: $pageSize,
+    sortBy: $sortBy,
+    sortOrder: $sortOrder) {
+    entries {
+      id
+      firstName
+      lastName
+      email
+    }
+    pageNumber
+    pageSize
+    totalPages
+    totalEntries
+  }
+}
 `
