@@ -1,9 +1,11 @@
 <template>
-  <ul>
-    <li v-for="user in users" :key="user.id">
-      {{ user.email }}
-    </li>
-  </ul>
+  <div class="content">
+    <ul>
+      <li v-for="user in users" :key="user.id">
+        {{ user.email }}
+      </li>
+    </ul>
+</div>
 </template>
 
 <script>
