@@ -23,7 +23,7 @@
           <i class="fas fa-home"></i>
         </span>
       </router-link>
-      <router-link to="/page2" class="navbar-item">Page2</router-link>
+      <router-link to="/users" class="navbar-item">Users</router-link>
     </div>
 
     <div class="navbar-end">

@@ -2,12 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import Vue from 'vue'
-// import { setContext } from 'apollo-link-context'
+import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-// import { ApolloLink } from 'apollo-link'
+import { HttpLink } from 'apollo-link-http'
 import VueApollo from 'vue-apollo'
+
+// import { ApolloLink } from 'apollo-link'
 // import { hasSubscription } from '@jumpn/utils-graphql'
 // import * as AbsintheSocket from '@absinthe/socket'
 // import { createAbsintheSocketLink } from '@absinthe/socket-apollo-link'
@@ -19,7 +20,7 @@ import 'buefy/dist/buefy.css'
 
 import router from './router'
 
-import { MY_USER_ID } from './constants/settings'
+import { MY_USER_ID, AUTH_TOKEN } from './constants/settings'
 
 require('./assets/main.scss')
 
@@ -28,22 +29,32 @@ require('./assets/main.scss')
 // )
 //
 // const absintheSocketLink = createAbsintheSocketLink(absintheSocket)
+//
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem(AUTH_TOKEN)
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  }
+})
 
-// const link = new ApolloLink().split(
-//   operation => hasSubscription(operation.query),
-//   absintheSocketLink,
-//   createHttpLink({uri: 'http://localhost:4000/api/graphql'})
-// )
-
-const link = createHttpLink({
+const httpLink = new HttpLink({
   uri: 'http://localhost:4000/api/graphql',
   credentials: 'same-origin'
 })
 
+// const basicLink = new ApolloLink().split(
+//   operation => hasSubscription(operation.query),
+//   absintheSocketLink,
+//   httpLink
+// )
+
 const cache = new InMemoryCache()
 
 const apolloClient = new ApolloClient({
-  link: link,
+  link: authLink.concat(httpLink),
   connectToDevTools: true,
   cache
 })
@@ -52,7 +63,10 @@ const apolloProvider = new VueApollo({
   defaultClient: apolloClient
 })
 
-Vue.use(Buefy)
+Vue.use(Buefy, {
+  defaultIconPack: 'fas',
+  defaultContainerElement: '#content'
+})
 Vue.use(VueApollo)
 
 Vue.config.productionTip = false
