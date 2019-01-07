@@ -54,6 +54,7 @@ export default {
       localStorage.removeItem(MY_USER_ID)
       localStorage.removeItem(AUTH_TOKEN)
       this.$root.$data.userId = localStorage.getItem(MY_USER_ID)
+      this.$router.push({ path: '/login' })
     }
   }
 }
