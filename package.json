@@ -21,6 +21,7 @@
     "apollo-client": "^2.4.7",
     "apollo-link": "1.2.6",
     "apollo-link-context": "^1.0.12",
+    "apollo-link-error": "^1.1.5",
     "apollo-link-http": "^1.5.9",
     "buefy": "^0.7.1",
     "debounce": "^1.2.0",
