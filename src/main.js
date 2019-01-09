@@ -24,11 +24,12 @@ import { MY_USER_ID, AUTH_TOKEN } from './constants/settings'
 
 require('./assets/main.scss')
 
-// const absintheSocket = AbsintheSocket.create(
-//   new PhoenixSocket('ws://localhost:4000/socket')
-// )
+// const wsUri = `${process.env.WS_SCHEME}://${process.env.SERVER_DOMAIN}/api/graphql`
+// console.log(wsUri)
 //
-// const absintheSocketLink = createAbsintheSocketLink(absintheSocket)
+// const absintheSocket = AbsintheSocket.create(
+//   new PhoenixSocket(wsUri)
+// )
 //
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem(AUTH_TOKEN)
@@ -40,8 +41,11 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+const serverUri = `${process.env.SERVER_SCHEME}://${process.env.SERVER_DOMAIN}/api/graphql`
+console.log(serverUri)
+
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000/api/graphql',
+  uri: serverUri,
   credentials: 'same-origin'
 })
 

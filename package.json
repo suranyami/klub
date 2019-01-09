@@ -25,6 +25,8 @@
     "apollo-link-http": "^1.5.9",
     "buefy": "^0.7.1",
     "debounce": "^1.2.0",
+    "dotenv": "^6.2.0",
+    "dotenv-webpack": "^1.6.0",
     "eslint-plugin-graphql": "^3.0.1",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
