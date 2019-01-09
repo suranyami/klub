@@ -159,7 +159,4 @@ export default {
 <style lang="scss">
   @import '@/assets/main.scss';
 
-  .input {
-    border-color: $grey-lighter;
-  }
 </style>
