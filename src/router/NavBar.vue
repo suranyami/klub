@@ -1,37 +1,29 @@
-<template>
-  <nav class="navbar is-primary is-fixed-top" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <div class="navbar-item">
-        <h1 class="title ">Klub</h1>
-      </div>
-      <a role="button"
-      class="navbar-burger burger"
-      aria-label="menu" aria-expanded="false"
-      data-target="navbarBasicExample"
-      @click="isOpen = !isOpen"
-      v-bind:class="{'is-active': isOpen}">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
+<template lang="pug">
+  nav.navbar.is-primary.is-fixed-top(role='navigation' aria-label='main navigation')
+    .navbar-brand
+      .navbar-item
+        h1.title Klub
 
-  <div id="navbarBasicExample" class="navbar-menu" v-bind:class="{'is-active': isOpen}">
-    <div class="navbar-start">
-      <router-link to="/home" class="navbar-item">
-        <span class="icon">
-          <i class="fas fa-home"></i>
-        </span>
-      </router-link>
-      <router-link to="/users" class="navbar-item">Users</router-link>
-    </div>
+      a.navbar-burger.burger(role='button'
+        aria-label='menu'
+        aria-expanded='false'
+        data-target='navbarBasicExample'
+        @click='isOpen = !isOpen'
+        v-bind:class="{'is-active': isOpen}")
 
-    <div class="navbar-end">
-      <a v-if="userId" @click="logout()" class="navbar-item">Logout</a>
-      <router-link to="/login" v-if="!userId" class="navbar-item">Login</router-link>
-    </div>
-  </div>
-</nav>
+        span(aria-hidden='true')
+        span(aria-hidden='true')
+        span(aria-hidden='true')
+
+    #navbarBasicExample.navbar-menu(v-bind:class="{'is-active': isOpen}")
+      .navbar-start
+        router-link.navbar-item(to='/home')
+          span.icon
+            i.fas.fa-home
+        router-link.navbar-item(to='/users') Users
+      .navbar-end
+        a.navbar-item(v-if='userId' @click='logout()') Logout
+        router-link.navbar-item(to='/login' v-if='!userId') Login
 </template>
 
 <script>

@@ -1,40 +1,30 @@
-<template>
-  <div id="container" class="container">
-      <div v-if="usersPage">
-        <b-table
-          :data="usersPage.entries"
-          :loading="loading"
-          :striped="true"
-          :bordered="true"
-          :narrowed="true"
-
+<template lang="pug">
+  #container.container
+    div(v-if='usersPage')
+      b-table(
+          :data='usersPage.entries'
+          :loading='loading'
+          :striped='true'
+          :bordered='true'
+          :narrowed='true'
           paginated
           backend-pagination
-          :total="totalEntries"
-          :per-page="pageSize"
-          @page-change="onPageChange"
-
           backend-sorting
-          :default-sort-direction="defaultSortOrder"
-          :default-sort="[sortBy, sortOrder]"
-          @sort="onSort">
+          :total='totalEntries'
+          :per-page='pageSize'
+          @page-change='onPageChange'
+          :default-sort-direction='defaultSortOrder'
+          :default-sort='[sortBy, sortOrder]'
+          @sort='onSort')
+        template(slot-scope='props')
+          b-table-column(field='email' label='Email' sortable='')
+            | {{ props.row.email }}
 
-          <template slot-scope="props">
-            <b-table-column field="email" label="Email" sortable>
-              {{ props.row.email }}
-            </b-table-column>
+          b-table-column(field='firstName' label='First Name' sortable='')
+            | {{ props.row.firstName }}
 
-            <b-table-column field="firstName" label="First Name" sortable>
-              {{ props.row.firstName }}
-            </b-table-column>
-
-            <b-table-column field="lastName" label="Last Name" sortable>
-              {{ props.row.lastName }}
-            </b-table-column>
-          </template>
-      </b-table>
-    </div>
-</div>
+          b-table-column(field='lastName' label='Last Name' sortable='')
+            | {{ props.row.lastName }}
 </template>
 
 <script>

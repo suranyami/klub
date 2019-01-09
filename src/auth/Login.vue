@@ -1,74 +1,29 @@
-<template>
-  <section>
-    <div class="column is-6 is-offset-2">
-      <h3 class="title">Login</h3>
-      <p class="subtitle">Please login to proceed.</p>
-      <div class="box">
-        <form @submit.prevent="validateBeforeSubmit">
-          <template v-if="!login">
-            <b-field label="First name"
-              :type="{'is-danger': errors.has('firstName')}"
-              :message="errors.first('firstName')">
-              <b-input
-                v-model="firstName"
-                name="firstName"
-                v-validate="'required'"
-                key="firstName-input" />
-            </b-field>
+<template lang="pug">
+  section
+    .column.is-6.is-offset-2
+      h3.title Login
+      p.subtitle Please login to proceed.
+      .box
+        form(@submit.prevent='validateBeforeSubmit')
+          template(v-if='!login')
+            b-field(label='First name' :type="{'is-danger': errors.has('firstName')}" :message="errors.first('firstName')")
+              b-input(v-model='firstName' name='firstName' v-validate="'required'" key='firstName-input')
 
-            <b-field label="Last name"
-              :type="{'is-danger': errors.has('lastName')}"
-              :message="errors.first('lastName')">
-                <b-input
-                  v-model="lastName"
-                  name="lastName"
-                  v-validate="'required'"
-                  key="lastName-input" />
-            </b-field>
-          </template>
+            b-field(label='Last name' :type="{'is-danger': errors.has('lastName')}" :message="errors.first('lastName')")
+              b-input(v-model='lastName' name='lastName' v-validate="'required'" key='lastName-input')
 
-          <b-field label="Email"
-            :type="{'is-danger': errors.has('email')}"
-            :message="errors.first('email')">
-            <b-input
-              v-model="email"
-              name="email"
-              v-validate="'required|email'"
-              data-vv-as="email"
-              placeholder="Your Email"
-              autofocus=""
-              key="email-input"/>
-          </b-field>
+          b-field(label='Email' :type="{'is-danger': errors.has('email')}" :message="errors.first('email')")
+            b-input(v-model='email' name='email' v-validate="'required|email'" data-vv-as='email' placeholder='Your Email' autofocus='' key='email-input')
 
-          <b-field label="Password"
-            :type="{'is-danger': errors.has('password')}"
-            :message="errors.first('password')">
-            <b-input
-              type="password"
-              v-model="password"
-              name="password"
-              v-validate="'required|min:8'"
-              key="password-input"/>
-          </b-field>
+          b-field(label='Password' :type="{'is-danger': errors.has('password')}" :message="errors.first('password')")
+            b-input(type='password' v-model='password' name='password' v-validate="'required|min:8'" key='password-input')
 
-          <b-field>
-            <button
-              type="submit"
-              class="button is-block is-info"
-              @click="confirm()">
-              {{login ? 'Login' : 'Create account'}}
-            </button>
-            <button
-              type="submit"
-              class="button is-text"
-              @click="login = !login">
-              {{login ? 'Sign Up' : 'Already have an account?'}}
-            </button>
-        </b-field>
-        </form>
-      </div>
-    </div>
-  </section>
+          b-field
+            button.button.is-block.is-info(type='submit' @click='confirm()')
+              | {{login ? &apos;Login&apos; : &apos;Create account&apos;}}
+            button.button.is-text(type='submit' @click='login = !login')
+              | {{login ? &apos;Sign Up&apos; : &apos;Already have an account?&apos;}}
+
 </template>
 
 <script>
