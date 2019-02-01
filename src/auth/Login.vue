@@ -98,6 +98,7 @@ export default {
           console.log(error)
           alert(error)
           this.$router.push({ path: '/login' })
+          this.login = false
         })
       }
       this.$router.push({ path: '/home' })
