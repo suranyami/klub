@@ -1,6 +1,7 @@
 <template>
   <div>
     <nav-bar/>
+    <h1>Hi!</h1>
     <section class="hero is-medium is-fullheight-with-navbar">
       <div class="body">
         <router-view/>
