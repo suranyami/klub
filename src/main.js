@@ -1,6 +1,3 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-
 import Vue from 'vue'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -41,8 +38,13 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const serverUri = `${process.env.SERVER_SCHEME}://${process.env.SERVER_DOMAIN}/api/graphql`
+console.log(process.env.VUE_APP_SERVER_SCHEME)
+console.log(process.env.VUE_APP_SERVER_DOMAIN)
+console.log(process.env.VUE_APP_SECRET)
+
+const serverUri = `${process.env.VUE_APP_SERVER_SCHEME}://${process.env.VUE_APP_SERVER_DOMAIN}/api/graphql`
 console.log(serverUri)
+console.log('*********************************************************')
 
 const httpLink = new HttpLink({
   uri: serverUri,
@@ -77,15 +79,13 @@ Vue.config.productionTip = false
 
 let userId = localStorage.getItem(MY_USER_ID)
 
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
   apolloProvider,
   data: {
     userId
   },
-  render: h => h(App),
-  components: { App },
-  template: '<App/>'
-})
+  render: h => h(App)
+}).$mount('#app')
+
+/* eslint-disable no-new */

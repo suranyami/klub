@@ -65,7 +65,7 @@ export default {
       if (this.login) {
         this.$apollo.mutate({
           mutation: LOGIN_USER_MUTATION,
-          variables: {email, password}
+          variables: { email, password }
         }).then((result) => {
           const id = result.data.login.user.id
           const token = result.data.login.token
