@@ -1,30 +1,31 @@
 <template lang="pug">
-  #container.container
-    div(v-if='usersPage')
-      b-table(
-          :data='usersPage.entries'
-          :loading='loading'
-          :striped='true'
-          :bordered='true'
-          :narrowed='true'
-          paginated
-          backend-pagination
-          backend-sorting
-          :total='totalEntries'
-          :per-page='pageSize'
-          @page-change='onPageChange'
-          :default-sort-direction='defaultSortOrder'
-          :default-sort='[sortBy, sortOrder]'
-          @sort='onSort')
-        template(slot-scope='props')
-          b-table-column(field='email' label='Email' sortable='')
-            | {{ props.row.email }}
+  section.section
+    #container.container
+      div(v-if='usersPage')
+        b-table(
+            :data='usersPage.entries'
+            :loading='loading'
+            :striped='true'
+            :bordered='true'
+            :narrowed='true'
+            paginated
+            backend-pagination
+            backend-sorting
+            :total='totalEntries'
+            :per-page='pageSize'
+            @page-change='onPageChange'
+            :default-sort-direction='defaultSortOrder'
+            :default-sort='[sortBy, sortOrder]'
+            @sort='onSort')
+          template(slot-scope='props')
+            b-table-column(field='email' label='Email' sortable='')
+              | {{ props.row.email }}
 
-          b-table-column(field='firstName' label='First Name' sortable='')
-            | {{ props.row.firstName }}
+            b-table-column(field='firstName' label='First Name' sortable='')
+              | {{ props.row.firstName }}
 
-          b-table-column(field='lastName' label='Last Name' sortable='')
-            | {{ props.row.lastName }}
+            b-table-column(field='lastName' label='Last Name' sortable='')
+              | {{ props.row.lastName }}
 </template>
 
 <script>
