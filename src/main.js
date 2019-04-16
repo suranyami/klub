@@ -38,13 +38,7 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-console.log(process.env.VUE_APP_SERVER_SCHEME)
-console.log(process.env.VUE_APP_SERVER_DOMAIN)
-console.log(process.env.VUE_APP_SECRET)
-
 const serverUri = `${process.env.VUE_APP_SERVER_SCHEME}://${process.env.VUE_APP_SERVER_DOMAIN}/api/graphql`
-console.log(serverUri)
-console.log('*********************************************************')
 
 const httpLink = new HttpLink({
   uri: serverUri,
